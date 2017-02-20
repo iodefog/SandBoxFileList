@@ -13,8 +13,8 @@
 
 效果图
 
-![image](./SnapImage/sandboxList.png)
+![image](https://github.com/lihongli528628/SendSandBoxFileDemo/tree/master/SnapImage/SandboxList.png)
 
-![image](./SnapImage/SendMail.png)
+![image](https://github.com/lihongli528628/SendSandBoxFileDemo/tree/master/SnapImage/SendMail.png)
 
-![image](./SnapImage/TestFile.png)
+![image](https://github.com/lihongli528628/SendSandBoxFileDemo/tree/master/SnapImage/TestFile.png)
