@@ -1,12 +1,13 @@
 //
 //  ViewController.m
-//  SendLogsDemo
+//  SendSandBoxFileDemo
 //
 //  Created by LHL on 17/2/18.
 //  Copyright © 2017年 lihongli. All rights reserved.
 //
 
 #import "ViewController.h"
+#import "FileListTableViewController.h"
 
 @interface ViewController ()
 
@@ -19,6 +20,11 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
+- (IBAction)pushLogsVC:(id)sender {
+    FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
+    [self.navigationController pushViewController:fileListVC animated:YES];
+//    [self presentViewController:fileListVC animated:YES completion:nil];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
