@@ -1,5 +1,12 @@
 # SendSandBoxFileDemo
 遍历沙盒目录下文件，如果是非文件夹。则发送邮件  . 
+
+# pod 
+```
+   pod 'SandBoxFileList', '~> 1.0.0'
+   pod install
+```
+
 使用方法 
 ```objc
     FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
