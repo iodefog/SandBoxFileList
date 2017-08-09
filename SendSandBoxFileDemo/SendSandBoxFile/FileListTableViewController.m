@@ -11,10 +11,63 @@
 
 #define HLNavigationBarHeight (self.navigationController ? 0 :64)
 
+@interface LogsReadWebViewController : UIViewController
+
+@property (nonatomic, strong) NSString *url;
+
+- (instancetype)initWithUrl:(NSString *)url;
+
+@end
+
+@implementation LogsReadWebViewController
+
+- (instancetype)initWithUrl:(NSString *)url{
+    if (self = [super init]) {
+        self.url = url;
+    }
+    return self;
+}
+
+#ifdef DEBUG
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+
+    UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 64)];
+    UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:@"查看日志"];
+    navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:@selector(back)];
+    [navigationBar pushNavigationItem:navigationItem animated:YES];
+    [self.view addSubview:navigationBar];
+    
+    if (self.url) {
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(navigationBar.bounds), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)- CGRectGetHeight(navigationBar.bounds))];
+        [self.view addSubview:webView];
+        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:self.url]]];
+    }
+}
+
+- (void)back{
+    if (self.presentingViewController) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+#endif
+
+@end
+
+#pragma mark - LogsListTableViewController
+
 @interface FileListTableViewController ()<MFMailComposeViewControllerDelegate>
 
+@property (nonatomic, strong) UIDocumentInteractionController *documentController;
 @property (nonatomic, strong) NSMutableArray    *fileList;
 @property (nonatomic, strong) UIView            *headerView;
+@property (nonatomic, strong) UINavigationItem  *ttNavigationItem;
+
 /**
  *  文件目录路径
  */
@@ -40,19 +93,23 @@
 
     UINavigationItem *navigationItem = self.navigationItem;
     if (![self.navigationController isKindOfClass:[UINavigationController class]]) {
-        UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:@""];
+        UINavigationItem *customNavigationItem = [[UINavigationItem alloc] initWithTitle:@""];
         UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, HLNavigationBarHeight)];
-        [navigationBar pushNavigationItem:navigationItem animated:NO];
+        [navigationBar pushNavigationItem:customNavigationItem animated:NO];
         
-        UIBarButtonItem *backBarItem = [[UIBarButtonItem alloc] initWithTitle:@"🔙返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-        navigationItem.leftBarButtonItem = backBarItem;
-        
+        navigationItem = customNavigationItem;
         self.headerView = navigationBar;
         [self.view addSubview:navigationBar];
     }
-    navigationItem.title = [self.directoryStr lastPathComponent] ?:@"文件目录";
+    navigationItem.title = self.title?:@"/";
+    
+    UIBarButtonItem *backBarItem = [[UIBarButtonItem alloc] initWithTitle: self.navigationController ? @"🔙返回" :@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    navigationItem.leftBarButtonItem = backBarItem;
+    
     UIBarButtonItem *remveBarItem = [[UIBarButtonItem alloc] initWithTitle:@"删除所有" style:UIBarButtonItemStylePlain target:self action:@selector(removeAllFiles)];
     navigationItem.rightBarButtonItem = remveBarItem;
+    
+    self.ttNavigationItem = navigationItem;
 }
 
 - (NSString *)getSendBoxPath:(NSString *)path{
@@ -76,17 +133,18 @@
     //设置主题
     [mailPicker setSubject: @"Sandbox目录文件"];
     // 添加发送者
-    NSArray *toRecipients = [NSArray arrayWithObject: @"test@mail.com"];
+    NSArray *toRecipients = nil;
+    //    [NSArray arrayWithObject: @""];
     //NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
     [mailPicker setToRecipients: toRecipients];
-//    // 添加图片
-//    UIImage *addPic = [UIImage imageNamed: @"123.jpg"];
-//    NSData *imageData = UIImagePNGRepresentation(addPic);            // png
-//    // NSData *imageData = UIImageJPEGRepresentation(addPic, 1);    // jpeg
-//    [mailPicker addAttachmentData: imageData mimeType: @"" fileName: @"123.jpg"];
+    //    // 添加图片
+    //    UIImage *addPic = [UIImage imageNamedForVideo: @"123.jpg"];
+    //    NSData *imageData = UIImagePNGRepresentation(addPic);            // png
+    //    // NSData *imageData = UIImageJPEGRepresentation(addPic, 1);    // jpeg
+    //    [mailPicker addAttachmentData: imageData mimeType: @"" fileName: @"123.jpg"];
     
-//    NSString *emailBody = @"eMail 正文";
-//    [mailPicker setMessageBody:emailBody isHTML:YES];
+    //    NSString *emailBody = @"eMail 正文";
+    //    [mailPicker setMessageBody:emailBody isHTML:YES];
     
     NSString *path = [NSString stringWithFormat:@"%@/%@", self.directoryStr, fileName];
     NSData *data = [NSData dataWithContentsOfFile:path];
@@ -102,14 +160,14 @@
  *  @param error      <#error description#>
  */
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
-    [self back];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)launchMailAppOnDevice:(NSString *)fileName{
     NSString *path = [NSString stringWithFormat:@"%@/%@", self.directoryStr, fileName];
     NSString *urlString = [NSString stringWithFormat:
                            @"mailto:"
-                           "test@mail.com,"
+                           ""
                            "?subject=%@"
                            "&body=%@"
                            ,
@@ -121,11 +179,49 @@
     [[UIApplication sharedApplication] openURL:url];
 }
 
+/***
+ * 显示AirDrop 发送文件
+ */
+
+- (void)showDocumentFileName:(NSString *)fileName{
+    NSString *path = [NSString stringWithFormat:@"%@/%@", self.directoryStr, fileName];
+    
+    if (!self.documentController) {
+        self.documentController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:path]];
+    }
+    //    self.documentController.delegate = self;
+    [self.documentController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
+    
+}
+
+
+/***
+ * 直接读 logs 文件
+ */
+- (void)readLogsFileName:(NSString *)fileName{
+    NSString *path = [NSString stringWithFormat:@"%@/%@", self.directoryStr, fileName];
+    
+    LogsReadWebViewController *webVC = [[LogsReadWebViewController alloc] init];
+    webVC.url = path;
+    if (self.presentingViewController) {
+        [self presentViewController:webVC animated:YES completion:nil];
+    }
+    else {
+        [self.navigationController pushViewController:webVC animated:YES];
+    }
+}
+
+
 /**
  * 返回
  */
 - (void)back{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.presentingViewController) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 /**
@@ -155,16 +251,34 @@
     }
     [self.fileList removeAllObjects];
     [self.tableView reloadData];
+}
+
+- (void)operationFileName:(NSString *)fileName{
     
-//    NSError *error = nil;
-//    if (![[NSFileManager defaultManager] removeItemAtPath:self.directoryStr error:&error]){
-//        NSLog(@"删除所有文件不成功");
-//        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"删除文件失败 %@", error] message:nil delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
-//        [alerView show];
-//    }else{
-//        [self.fileList removeAllObjects];
-//        [self.tableView reloadData];
-//    }
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"日志文件处理" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *mailAction = [UIAlertAction actionWithTitle:@"邮件发送" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self sendMail:fileName];
+    }];
+    
+    UIAlertAction *airDropAction = [UIAlertAction actionWithTitle:@"AirDrop发送" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self showDocumentFileName:fileName];
+    }];
+    
+    UIAlertAction *readAction = [UIAlertAction actionWithTitle:@"直接阅读" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self readLogsFileName:fileName];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    
+    [alertController addAction:mailAction];
+    [alertController addAction:airDropAction];
+    [alertController addAction:readAction];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:^{
+        
+    }];
 }
 
 - (BOOL)recognizeSimultaneouslyWithGestureRecognizer{
@@ -187,6 +301,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.fileList.count == 0) {
+        self.ttNavigationItem.rightBarButtonItem = nil;
+    }
     return self.fileList.count;
 }
 
@@ -216,17 +333,17 @@
         if (isDirectory) {
             FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
             fileListVC.directoryStr = filePath;
+            fileListVC.title = [NSString stringWithFormat:@"/%@",[filePath lastPathComponent]];
             if (self.navigationController) {
                 [self.navigationController pushViewController:fileListVC animated:YES];
             }else {
                 [self presentViewController:fileListVC animated:YES completion:nil];
             }
         }else {
-            [self sendMail:self.fileList[indexPath.row]];
+            [self operationFileName:self.fileList[indexPath.row]];
         }
     }
 }
-
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

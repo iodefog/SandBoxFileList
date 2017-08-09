@@ -285,8 +285,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sohu.SendLogsDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "48a5436e-cfb6-41c8-9aad-31d0c2f08be7";
-				PROVISIONING_PROFILE_SPECIFIER = WeiChaoSOHUDevelopStarProfile;
+				PROVISIONING_PROFILE = "eea16c42-a343-4a0e-ad91-e8d1a3d2c62a";
+				PROVISIONING_PROFILE_SPECIFIER = develop_universal_profile;
 			};
 			name = Debug;
 		};
@@ -300,8 +300,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sohu.SendLogsDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "48a5436e-cfb6-41c8-9aad-31d0c2f08be7";
-				PROVISIONING_PROFILE_SPECIFIER = WeiChaoSOHUDevelopStarProfile;
+				PROVISIONING_PROFILE = "eea16c42-a343-4a0e-ad91-e8d1a3d2c62a";
+				PROVISIONING_PROFILE_SPECIFIER = develop_universal_profile;
 			};
 			name = Release;
 		};

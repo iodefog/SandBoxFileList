@@ -23,7 +23,11 @@
 - (IBAction)pushLogsVC:(id)sender {
     FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
     [self.navigationController pushViewController:fileListVC animated:YES];
-//    [self presentViewController:fileListVC animated:YES completion:nil];
+}
+
+- (IBAction)presentVC:(id)sender {
+    FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
+    [self presentViewController:fileListVC animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
