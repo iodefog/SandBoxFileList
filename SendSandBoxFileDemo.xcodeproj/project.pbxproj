@@ -13,8 +13,8 @@
 		C74E254F1E5AE989009DF7A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74E25431E5AE989009DF7A6 /* Main.storyboard */; };
 		C74E25501E5AE989009DF7A6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C74E25451E5AE989009DF7A6 /* Info.plist */; };
 		C74E25511E5AE989009DF7A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C74E25461E5AE989009DF7A6 /* main.m */; };
-		C74E25521E5AE989009DF7A6 /* FileListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74E25491E5AE989009DF7A6 /* FileListTableViewController.m */; };
 		C74E25531E5AE989009DF7A6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74E254B1E5AE989009DF7A6 /* ViewController.m */; };
+		C74E25571E5B027C009DF7A6 /* FileListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74E25561E5B027C009DF7A6 /* FileListTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,10 +26,10 @@
 		C74E25441E5AE989009DF7A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C74E25451E5AE989009DF7A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C74E25461E5AE989009DF7A6 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C74E25481E5AE989009DF7A6 /* FileListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListTableViewController.h; sourceTree = "<group>"; };
-		C74E25491E5AE989009DF7A6 /* FileListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileListTableViewController.m; sourceTree = "<group>"; };
 		C74E254A1E5AE989009DF7A6 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		C74E254B1E5AE989009DF7A6 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C74E25551E5B027C009DF7A6 /* FileListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListTableViewController.h; sourceTree = "<group>"; };
+		C74E25561E5B027C009DF7A6 /* FileListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileListTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,20 +69,20 @@
 				C74E25431E5AE989009DF7A6 /* Main.storyboard */,
 				C74E25451E5AE989009DF7A6 /* Info.plist */,
 				C74E25461E5AE989009DF7A6 /* main.m */,
-				C74E25471E5AE989009DF7A6 /* SendLogs */,
 				C74E254A1E5AE989009DF7A6 /* ViewController.h */,
 				C74E254B1E5AE989009DF7A6 /* ViewController.m */,
+				C74E25541E5B027C009DF7A6 /* SendSandBoxFile */,
 			);
 			path = SendSandBoxFileDemo;
 			sourceTree = "<group>";
 		};
-		C74E25471E5AE989009DF7A6 /* SendLogs */ = {
+		C74E25541E5B027C009DF7A6 /* SendSandBoxFile */ = {
 			isa = PBXGroup;
 			children = (
-				C74E25481E5AE989009DF7A6 /* FileListTableViewController.h */,
-				C74E25491E5AE989009DF7A6 /* FileListTableViewController.m */,
+				C74E25551E5B027C009DF7A6 /* FileListTableViewController.h */,
+				C74E25561E5B027C009DF7A6 /* FileListTableViewController.m */,
 			);
-			path = SendLogs;
+			path = SendSandBoxFile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,7 +161,7 @@
 				C74E25511E5AE989009DF7A6 /* main.m in Sources */,
 				C74E254C1E5AE989009DF7A6 /* AppDelegate.m in Sources */,
 				C74E25531E5AE989009DF7A6 /* ViewController.m in Sources */,
-				C74E25521E5AE989009DF7A6 /* FileListTableViewController.m in Sources */,
+				C74E25571E5B027C009DF7A6 /* FileListTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
