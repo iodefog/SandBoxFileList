@@ -23,7 +23,3 @@
 效果图
 
 ![image](./SnapImage/IMG_2389.PNG)
-![image](./SnapImage/IMG_2390.PNG)
-![image](./SnapImage/IMG_2391.PNG)
-![image](./SnapImage/IMG_2392.PNG)
-![image](./SnapImage/IMG_2393.PNG)
