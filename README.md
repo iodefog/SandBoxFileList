@@ -7,7 +7,7 @@
 
 # pod 
 ```
-   pod 'SandBoxFileList', '~> 1.0.0'
+   pod 'SandBoxFileList'
    pod install
 ```
 
