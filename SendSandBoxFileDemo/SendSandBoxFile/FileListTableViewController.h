@@ -14,5 +14,9 @@
 
 @interface FileListTableViewController : UITableViewController
 
+/**
+ *  文件目录起始路径，默认为root
+ */
+@property (nonatomic, strong) NSString *directoryStr;
 
 @end

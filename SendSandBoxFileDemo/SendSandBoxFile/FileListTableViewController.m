@@ -68,14 +68,51 @@
 @property (nonatomic, strong) UIView            *headerView;
 @property (nonatomic, strong) UINavigationItem  *ttNavigationItem;
 
-/**
- *  文件目录路径
- */
-@property (nonatomic, strong) NSString *directoryStr;
 
 @end
 
 @implementation FileListTableViewController
+
+//遍历文件夹获得文件夹大小
++ (NSString *) folderSizeAtPath:(NSString*) folderPath{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:folderPath]) return 0;
+    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];
+    NSString* fileName;
+    long long folderSize = 0;
+    while ((fileName = [childFilesEnumerator nextObject]) != nil){
+        NSString* fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
+        folderSize += [self fileSizeAtPath:fileAbsolutePath];
+    }
+    return [self humanReadableStringFromBytes:folderSize];
+}
+
+//单个文件的大小
++ (long long) fileSizeAtPath:(NSString*) filePath{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:filePath]){
+        return [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
+    }
+    return 0;
+}
+
+//计算文件大小
++ (NSString *)humanReadableStringFromBytes:(unsigned long long)byteCount
+{
+    float numberOfBytes = byteCount;
+    int multiplyFactor = 0;
+    
+    NSArray *tokens = [NSArray arrayWithObjects:@"bytes",@"KB",@"MB",@"GB",@"TB",@"PB",@"EB",@"ZB",@"YB",nil];
+    
+    while (numberOfBytes > 1024) {
+        numberOfBytes /= 1024;
+        multiplyFactor++;
+    }
+    
+    return [NSString stringWithFormat:@"%4.2f %@",numberOfBytes, [tokens objectAtIndex:multiplyFactor]];
+}
+
+#pragma mark --
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -84,7 +121,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"FileTableViewCell"];
     
     NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.directoryStr?:NSHomeDirectory() error:nil];
     // 进行倒叙排列
@@ -103,12 +139,16 @@
     }
     navigationItem.title = self.title?:@"/";
     
-    UIBarButtonItem *backBarItem = [[UIBarButtonItem alloc] initWithTitle: self.navigationController ? @"🔙返回" :@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    navigationItem.leftBarButtonItem = backBarItem;
+    if (!self.navigationController) {
+        UIBarButtonItem *backBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(back)];
+        navigationItem.leftBarButtonItem = backBarItem;
+    }
     
-    UIBarButtonItem *remveBarItem = [[UIBarButtonItem alloc] initWithTitle:@"删除所有" style:UIBarButtonItemStylePlain target:self action:@selector(removeAllFiles)];
+    UIBarButtonItem *remveBarItem = [[UIBarButtonItem alloc] initWithTitle:@"Cleared" style:UIBarButtonItemStylePlain target:self action:@selector(removeAllFiles)];
     navigationItem.rightBarButtonItem = remveBarItem;
     
+    [[UIBarButtonItem appearance]setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin) forBarMetrics:UIBarMetricsDefault];
+
     self.ttNavigationItem = navigationItem;
 }
 
@@ -196,7 +236,7 @@
 
 
 /***
- * 直接读 logs 文件
+ * 直接读 文件
  */
 - (void)readLogsFileName:(NSString *)fileName{
     NSString *path = [NSString stringWithFormat:@"%@/%@", self.directoryStr, fileName];
@@ -288,7 +328,6 @@
 - (BOOL)panGestureEnable{
     return NO;
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -308,7 +347,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 54;
+    return 64;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -320,9 +359,30 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FileTableViewCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FileTableViewCell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"FileTableViewCell"];
+    }
+    
     cell.textLabel.numberOfLines = 3;
     cell.textLabel.text = self.fileList[indexPath.row];
+    BOOL isDirectory = NO;
+    [[NSFileManager defaultManager] fileExistsAtPath:[self getSendBoxPath:cell.textLabel.text] isDirectory:&isDirectory];
+    if (isDirectory) {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSString *str = [[self class] folderSizeAtPath:[self getSendBoxPath:cell.textLabel.text]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.detailTextLabel.text = str;
+            });
+        });
+    } else {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSString *str = [[self class] humanReadableStringFromBytes: [[self class] fileSizeAtPath:[self getSendBoxPath:cell.textLabel.text]]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.detailTextLabel.text = str;
+            });
+        });
+    }
     return cell;
 }
 
