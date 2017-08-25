@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SandBoxFileList"
-  s.version      = "2.0.0"
+  s.version      = "2.0.1"
   s.summary      = "遍历沙盒目录下文件，如果是非文件夹。则发送邮件"
 
   # This description is used to generate tags and improve search results.
@@ -25,6 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
+  Traverse the sandbox directory under the file.
   遍历沙盒目录下文件，如果是非文件夹。
   可以直接查看文本，可以使用airDrop发送到其他App，或者发送邮件
  . 使用方法
@@ -88,7 +89,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/lihongli528628/SendSandBoxFileDemo.git", :tag => "2.0.0" }
+  s.source       = { :git => "https://github.com/lihongli528628/SendSandBoxFileDemo.git", :tag => "2.0.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
