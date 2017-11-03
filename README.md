@@ -22,6 +22,32 @@
     [self presentViewController:fileListVC animated:YES completion:nil];
 ```
 
+
+如果需要指定起始在某个文件夹下，则：
+
+
+使用方法 
+```objc
+    FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [paths firstObject];
+    fileListVC.directoryStr = documentPath;
+
+
+    [self.navigationController pushViewController:fileListVC animated:YES];
+```
+或者
+```objc
+    FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [paths firstObject];
+    fileListVC.directoryStr = documentPath;
+
+    [self presentViewController:fileListVC animated:YES completion:nil];
+
+
 效果图
 
 ![image](./SnapImage/IMG_2389.PNG)

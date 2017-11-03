@@ -22,6 +22,10 @@
 
 - (IBAction)pushLogsVC:(id)sender {
     FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [paths firstObject];
+    fileListVC.directoryStr = documentPath;
+    
     [self.navigationController pushViewController:fileListVC animated:YES];
 }
 
