@@ -26,7 +26,6 @@
 如果需要指定起始在某个文件夹下，则：
 
 
-使用方法 
 ```objc
     FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
 
@@ -46,7 +45,7 @@
     fileListVC.directoryStr = documentPath;
 
     [self presentViewController:fileListVC animated:YES completion:nil];
-
+```
 
 效果图
 
