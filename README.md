@@ -42,7 +42,12 @@
 
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [paths firstObject];
+
+    // 默认起始地址
     fileListVC.directoryStr = documentPath;
+
+    // 默认发送邮件的列表或者单个邮箱
+    fileListVC.defaultMail = @"aaa@gmail.com,bbb@gmail.com,ccc@gmail.com";
 
     [self presentViewController:fileListVC animated:YES completion:nil];
 ```
