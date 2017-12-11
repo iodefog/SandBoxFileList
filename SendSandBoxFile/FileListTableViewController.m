@@ -173,7 +173,7 @@
     //设置主题
     [mailPicker setSubject: @"Sandbox目录文件"];
     // 添加发送者
-    NSArray *toRecipients = nil;
+    NSArray *toRecipients = [self.defaultMail componentsSeparatedByString:@","];
     //    [NSArray arrayWithObject: @""];
     //NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
     [mailPicker setToRecipients: toRecipients];
@@ -206,11 +206,11 @@
 - (void)launchMailAppOnDevice:(NSString *)fileName{
     NSString *path = [NSString stringWithFormat:@"%@/%@", self.directoryStr, fileName];
     NSString *urlString = [NSString stringWithFormat:
-                           @"mailto:"
-                           ""
+                           @"mailto:%@"
                            "?subject=%@"
                            "&body=%@"
                            ,
+                           self.defaultMail?:@"",
                            @"Sandbox目录文件",
                            [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil]];
                            
@@ -273,9 +273,13 @@
     NSError *error = nil;
     if (![[NSFileManager defaultManager] removeItemAtPath:filePath error:&error]){
         NSLog(@"删除本地文件不成功");
-       UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"删除文件失败 %@", error] message:nil delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
-        [alerView show];
-        success = NO;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"删除文件失败 %@", error] preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+        }];
+        
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
     return success;
 }
@@ -369,16 +373,14 @@
     BOOL isDirectory = NO;
     [[NSFileManager defaultManager] fileExistsAtPath:[self getSendBoxPath:cell.textLabel.text] isDirectory:&isDirectory];
     if (isDirectory) {
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             NSString *str = [[self class] folderSizeAtPath:[self getSendBoxPath:cell.textLabel.text]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                cell.detailTextLabel.text = str;
-            });
+            cell.detailTextLabel.text = str;
         });
     } else {
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            NSString *str = [[self class] humanReadableStringFromBytes: [[self class] fileSizeAtPath:[self getSendBoxPath:cell.textLabel.text]]];
             dispatch_async(dispatch_get_main_queue(), ^{
+                NSString *str = [[self class] humanReadableStringFromBytes: [[self class] fileSizeAtPath:[self getSendBoxPath:cell.textLabel.text]]];
                 cell.detailTextLabel.text = str;
             });
         });

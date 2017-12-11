@@ -22,15 +22,18 @@
 
 - (IBAction)pushLogsVC:(id)sender {
     FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentPath = [paths firstObject];
-    fileListVC.directoryStr = documentPath;
     
     [self.navigationController pushViewController:fileListVC animated:YES];
 }
 
 - (IBAction)presentVC:(id)sender {
     FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [paths firstObject];
+    fileListVC.directoryStr = documentPath;
+    fileListVC.defaultMail = @"aaa@gmail.com";
+    
     [self presentViewController:fileListVC animated:YES completion:nil];
 }
 

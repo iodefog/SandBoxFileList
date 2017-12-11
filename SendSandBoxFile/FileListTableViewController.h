@@ -19,4 +19,10 @@
  */
 @property (nonatomic, strong) NSString *directoryStr;
 
+/**
+ *  默认邮箱地址，或者字符串。例如 xxx@mail.com, 多个请用"AAA@gmail.com,BBB@gmail.com,CCC@gmail.com"
+ */
+@property (nonatomic, strong) NSString *defaultMail;
+
+
 @end

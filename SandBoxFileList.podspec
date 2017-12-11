@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SandBoxFileList"
-  s.version      = "2.0.1"
-  s.summary      = "遍历沙盒目录下文件，如果是非文件夹。则发送邮件"
+  s.version      = "2.0.2"
+  s.summary      = "Use airDrop or Mail to transfer sandBox files, or view the file directly or play the video"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,19 +25,18 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-  Traverse the sandbox directory under the file.
-  遍历沙盒目录下文件，如果是非文件夹。
-  可以直接查看文本，可以使用airDrop发送到其他App，或者发送邮件
- . 使用方法
+
+  Use airDrop or Mail to transfer sandBox files
+  
     FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
     [self.navigationController pushViewController:fileListVC animated:YES];
-或者
 
+or
     FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
     [self presentViewController:fileListVC animated:YES completion:nil];
                    DESC
 
-  s.homepage     = "https://github.com/lihongli528628/SendSandBoxFileDemo"
+  s.homepage     = "https://github.com/lihongli528628/SendSandBoxFile"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -89,7 +88,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/lihongli528628/SendSandBoxFileDemo.git", :tag => "2.0.1" }
+  s.source       = { :git => "https://github.com/lihongli528628/SendSandBoxFile.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -100,7 +99,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Classes", "SendSandBoxFileDemo/SendSandBoxFile/*.{h,m}"
+  s.source_files  = "Classes", "SendSandBoxFile/*.{h,m}"
   s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"

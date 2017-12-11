@@ -14,7 +14,7 @@
 		C74E25501E5AE989009DF7A6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C74E25451E5AE989009DF7A6 /* Info.plist */; };
 		C74E25511E5AE989009DF7A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C74E25461E5AE989009DF7A6 /* main.m */; };
 		C74E25531E5AE989009DF7A6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74E254B1E5AE989009DF7A6 /* ViewController.m */; };
-		C74E25571E5B027C009DF7A6 /* FileListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74E25561E5B027C009DF7A6 /* FileListTableViewController.m */; };
+		C7A0CFF91FDE6E0900C470B8 /* FileListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A0CFF71FDE6E0900C470B8 /* FileListTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +28,8 @@
 		C74E25461E5AE989009DF7A6 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C74E254A1E5AE989009DF7A6 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		C74E254B1E5AE989009DF7A6 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		C74E25551E5B027C009DF7A6 /* FileListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListTableViewController.h; sourceTree = "<group>"; };
-		C74E25561E5B027C009DF7A6 /* FileListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileListTableViewController.m; sourceTree = "<group>"; };
+		C7A0CFF71FDE6E0900C470B8 /* FileListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileListTableViewController.m; sourceTree = "<group>"; };
+		C7A0CFF81FDE6E0900C470B8 /* FileListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListTableViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,19 +71,19 @@
 				C74E25461E5AE989009DF7A6 /* main.m */,
 				C74E254A1E5AE989009DF7A6 /* ViewController.h */,
 				C74E254B1E5AE989009DF7A6 /* ViewController.m */,
-				C74E25541E5B027C009DF7A6 /* SendSandBoxFile */,
+				C7A0CFF61FDE6E0900C470B8 /* SendSandBoxFile */,
 			);
 			path = SendSandBoxFileDemo;
 			sourceTree = "<group>";
 		};
-		C74E25541E5B027C009DF7A6 /* SendSandBoxFile */ = {
+		C7A0CFF61FDE6E0900C470B8 /* SendSandBoxFile */ = {
 			isa = PBXGroup;
 			children = (
-				C74E25551E5B027C009DF7A6 /* FileListTableViewController.h */,
-				C74E25561E5B027C009DF7A6 /* FileListTableViewController.m */,
+				C7A0CFF81FDE6E0900C470B8 /* FileListTableViewController.h */,
+				C7A0CFF71FDE6E0900C470B8 /* FileListTableViewController.m */,
 			);
 			path = SendSandBoxFile;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -161,7 +161,7 @@
 				C74E25511E5AE989009DF7A6 /* main.m in Sources */,
 				C74E254C1E5AE989009DF7A6 /* AppDelegate.m in Sources */,
 				C74E25531E5AE989009DF7A6 /* ViewController.m in Sources */,
-				C74E25571E5B027C009DF7A6 /* FileListTableViewController.m in Sources */,
+				C7A0CFF91FDE6E0900C470B8 /* FileListTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
