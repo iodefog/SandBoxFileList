@@ -29,10 +29,10 @@
 - (IBAction)presentVC:(id)sender {
     FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentPath = [paths firstObject];
-    fileListVC.directoryStr = documentPath;
-    fileListVC.defaultMail = @"aaa@gmail.com,bbb@gmail.com,ccc@gmail.com";
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentPath = [paths firstObject];
+//    fileListVC.directoryStr = documentPath;
+//    fileListVC.defaultMail = @"aaa@gmail.com,bbb@gmail.com,ccc@gmail.com";
 
     [self presentViewController:fileListVC animated:YES completion:nil];
 }
