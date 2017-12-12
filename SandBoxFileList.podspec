@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SandBoxFileList"
-  s.version      = "2.0.2"
+  s.version      = "2.0.3"
   s.summary      = "Use airDrop or Mail to transfer sandBox files, or view the file directly or play the video"
 
   # This description is used to generate tags and improve search results.
@@ -36,7 +36,7 @@ or
     [self presentViewController:fileListVC animated:YES completion:nil];
                    DESC
 
-  s.homepage     = "https://github.com/lihongli528628/SendSandBoxFile"
+  s.homepage     = "https://github.com/iodefog/SendSandBoxFile"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -88,7 +88,7 @@ or
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/lihongli528628/SendSandBoxFile.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/iodefog/SendSandBoxFile.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
