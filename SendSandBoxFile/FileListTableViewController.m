@@ -42,7 +42,14 @@
     if (self.url) {
         UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(navigationBar.bounds), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)- CGRectGetHeight(navigationBar.bounds))];
         [self.view addSubview:webView];
-        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:self.url]]];
+        
+        NSString * htmlstr = [[NSString alloc]initWithContentsOfURL:[NSURL fileURLWithPath:self.url] encoding:NSUTF8StringEncoding error:nil];
+        if (htmlstr) {
+            [webView loadHTMLString:htmlstr baseURL:[NSURL fileURLWithPath:self.url]];
+        }
+        else {
+            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:self.url]]];
+        }
     }
 }
 

@@ -18,10 +18,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    NSLog(@"%@", NSHomeDirectory());
+    
    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     documentPath = [documentPath stringByAppendingPathComponent:@"/test.txt"];
     
-    NSString *testText = @"Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.";
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"txt"];
+    NSString *testText = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     NSError *error = nil;
     [testText writeToFile:documentPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
     NSLog(@"error = %@", error);

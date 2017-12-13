@@ -1,0 +1,24 @@
+说明
+
+1.本文使用的RSA相关操作是使用的三方库openSSL
+2.本文RSA使用的是1024位秘钥加密(能满足一般的需求,除非需要非常高的安全性)
+
+相关知识
+
+1.生成密文的长度等于密钥长度(密钥长度越大，生成密文的长度就越大，加密的速度就越慢，而密文也就越难被破解掉)。
+2.不管明文长度是多少，RSA生成的密文长度总是固定的。
+3.明文长度不能超过密钥长度,否则就会出问题(使用分段加密)。
+4.RSA加密每次结果是不一样的(加密时对加密内容使用了长度为11位的随机填充)。
+5.RSA本身不支持中文(一般使用URL编码来解决中文问题)。
+6.公钥加密私钥解密,私钥加密公钥解密
+
+前期准备:
+
+1.公钥/私钥(一般应该只会用到一个,另外一个是后台使用),这个一般是后台给的,自己生成也很简单,可以去网站上生成也可以使用终端生成
+2.openSSL三方库(建议使用coocpods导入)
+
+RSA加密解密
+
+1.私钥/公钥格式化(需要把密钥/私钥按进行特定的格式化才能进行 加解密)
+
+Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

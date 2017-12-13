@@ -15,6 +15,7 @@
 		C74E25531E5AE989009DF7A6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74E254B1E5AE989009DF7A6 /* ViewController.m */; };
 		C7A0CFF91FDE6E0900C470B8 /* FileListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A0CFF71FDE6E0900C470B8 /* FileListTableViewController.m */; };
 		C7A0CFFC1FDE756C00C470B8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7A0CFFA1FDE756C00C470B8 /* Launch Screen.storyboard */; };
+		C7F95E131FE137E800123AEC /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = C7F95E121FE137E700123AEC /* test.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		C7A0CFF71FDE6E0900C470B8 /* FileListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileListTableViewController.m; sourceTree = "<group>"; };
 		C7A0CFF81FDE6E0900C470B8 /* FileListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListTableViewController.h; sourceTree = "<group>"; };
 		C7A0CFFB1FDE756C00C470B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
+		C7F95E121FE137E700123AEC /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				C74E25461E5AE989009DF7A6 /* main.m */,
 				C74E254A1E5AE989009DF7A6 /* ViewController.h */,
 				C74E254B1E5AE989009DF7A6 /* ViewController.m */,
+				C7F95E121FE137E700123AEC /* test.txt */,
 				C7A0CFF61FDE6E0900C470B8 /* SendSandBoxFile */,
 			);
 			path = SendSandBoxFileDemo;
@@ -148,6 +151,7 @@
 				C74E254F1E5AE989009DF7A6 /* Main.storyboard in Resources */,
 				C7A0CFFC1FDE756C00C470B8 /* Launch Screen.storyboard in Resources */,
 				C74E254D1E5AE989009DF7A6 /* Assets.xcassets in Resources */,
+				C7F95E131FE137E800123AEC /* test.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
