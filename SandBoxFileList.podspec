@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SandBoxFileList"
-  s.version      = "2.0.3"
+  s.version      = "2.0.4"
   s.summary      = "Use airDrop or Mail to transfer sandBox files, or view the file directly or play the video"
 
   # This description is used to generate tags and improve search results.

@@ -15,6 +15,7 @@
 		C74E25531E5AE989009DF7A6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74E254B1E5AE989009DF7A6 /* ViewController.m */; };
 		C7A0CFF91FDE6E0900C470B8 /* FileListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A0CFF71FDE6E0900C470B8 /* FileListTableViewController.m */; };
 		C7A0CFFC1FDE756C00C470B8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7A0CFFA1FDE756C00C470B8 /* Launch Screen.storyboard */; };
+		C7F6BB1A1FEA099A009A0EEA /* com.sohu.mobile.log in Resources */ = {isa = PBXBuildFile; fileRef = C7F6BB191FEA099A009A0EEA /* com.sohu.mobile.log */; };
 		C7F95E131FE137E800123AEC /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = C7F95E121FE137E700123AEC /* test.txt */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		C7A0CFF71FDE6E0900C470B8 /* FileListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileListTableViewController.m; sourceTree = "<group>"; };
 		C7A0CFF81FDE6E0900C470B8 /* FileListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListTableViewController.h; sourceTree = "<group>"; };
 		C7A0CFFB1FDE756C00C470B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
+		C7F6BB191FEA099A009A0EEA /* com.sohu.mobile.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = com.sohu.mobile.log; sourceTree = "<group>"; };
 		C7F95E121FE137E700123AEC /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +68,7 @@
 			children = (
 				C74E253E1E5AE989009DF7A6 /* AppDelegate.h */,
 				C74E253F1E5AE989009DF7A6 /* AppDelegate.m */,
+				C7F6BB191FEA099A009A0EEA /* com.sohu.mobile.log */,
 				C74E25401E5AE989009DF7A6 /* Assets.xcassets */,
 				C74E25431E5AE989009DF7A6 /* Main.storyboard */,
 				C74E25451E5AE989009DF7A6 /* Info.plist */,
@@ -150,6 +153,7 @@
 				C74E25501E5AE989009DF7A6 /* Info.plist in Resources */,
 				C74E254F1E5AE989009DF7A6 /* Main.storyboard in Resources */,
 				C7A0CFFC1FDE756C00C470B8 /* Launch Screen.storyboard in Resources */,
+				C7F6BB1A1FEA099A009A0EEA /* com.sohu.mobile.log in Resources */,
 				C74E254D1E5AE989009DF7A6 /* Assets.xcassets in Resources */,
 				C7F95E131FE137E800123AEC /* test.txt in Resources */,
 			);

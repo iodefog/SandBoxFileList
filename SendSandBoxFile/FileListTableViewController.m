@@ -11,9 +11,10 @@
 
 #define HLNavigationBarHeight (self.navigationController ? 0 :64)
 
-@interface LogsReadWebViewController : UIViewController
+@interface LogsReadWebViewController : UIViewController<UIWebViewDelegate>
 
 @property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) UIWebView *webView;
 
 - (instancetype)initWithUrl:(NSString *)url;
 
@@ -33,23 +34,46 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
 
-    UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 64)];
-    UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:@"查看日志"];
-    navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:@selector(back)];
-    [navigationBar pushNavigationItem:navigationItem animated:YES];
-    [self.view addSubview:navigationBar];
+    UINavigationBar *navigationBar = nil;
+    UINavigationItem *navigationItem = nil;
+    if (self.presentingViewController) {
+        navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 64)];
+        navigationItem = [[UINavigationItem alloc] initWithTitle:@"查看日志"];
+        navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:@selector(back)];
+        [navigationBar pushNavigationItem:navigationItem animated:YES];
+        [self.view addSubview:navigationBar];
+    }
+    else {
+        navigationBar = self.navigationController.navigationBar;
+        navigationItem = self.navigationItem;
+    }
+    
     
     if (self.url) {
         UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(navigationBar.bounds), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)- CGRectGetHeight(navigationBar.bounds))];
+        webView.delegate = self;
+        webView.dataDetectorTypes = UIDataDetectorTypeLink;
         [self.view addSubview:webView];
+        self.webView = webView;
         
-        NSString * htmlstr = [[NSString alloc]initWithContentsOfURL:[NSURL fileURLWithPath:self.url] encoding:NSUTF8StringEncoding error:nil];
-        if (htmlstr) {
-            [webView loadHTMLString:htmlstr baseURL:[NSURL fileURLWithPath:self.url]];
-        }
-        else {
-            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:self.url]]];
-        }
+        [self resetData];
+        [webView scalesPageToFit];
+    }
+    
+    [self createWebViewControl:navigationItem];
+}
+
+// 重置数据
+- (void)resetData{
+    NSString * htmlstr = [[NSString alloc]initWithContentsOfURL:[NSURL fileURLWithPath:self.url] encoding:NSUTF8StringEncoding error:nil];
+    if (htmlstr) {
+        
+        // 自动换行
+        NSString *newHtml = [NSString stringWithFormat:@"<head><style>img{max-width:320px !important;}</style></head><body width=320px style=\"word-wrap:break-word; font-family:Arial\">%@</body>", htmlstr];
+        [self.webView loadHTMLString:newHtml baseURL:[NSURL fileURLWithPath:self.url]];
+    }
+    else {
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:self.url]]];
     }
 }
 
@@ -62,6 +86,20 @@
     }
 }
 
+- (void)createWebViewControl:(UINavigationItem *)navigationItem{
+    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshClicked:)];
+    UIBarButtonItem *rewindItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(rewindClicked:)];
+    navigationItem.rightBarButtonItems = @[refreshItem, rewindItem];
+}
+
+- (void)refreshClicked:(UIBarButtonItem *)barItem{
+    [self.webView stopLoading];
+    [self.webView reload];
+}
+- (void)rewindClicked:(UIBarButtonItem *)barItem{
+    [self.webView stopLoading];
+    [self resetData];
+}
 #endif
 
 @end
