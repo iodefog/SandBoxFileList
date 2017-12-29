@@ -29,14 +29,6 @@
     [testText writeToFile:documentPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
     NSLog(@"error = %@", error);
     
-    NSString *logPath = [[NSBundle mainBundle] pathForResource:@"com.sohu.mobile" ofType:@"log"];
-    NSString *logTestText = [NSString stringWithContentsOfFile:logPath encoding:NSUTF8StringEncoding error:nil];
-    NSString *documentPath2 = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    documentPath2 = [documentPath2 stringByAppendingPathComponent:@"/com.sohu.mobile.log"];
-    [logTestText writeToFile:documentPath2 atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    NSLog(@"error = %@", error);
-
-    
     return YES;
 }
 
