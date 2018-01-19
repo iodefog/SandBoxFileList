@@ -15,6 +15,15 @@
    pod install
 ```
 
+
+Swift 库
+```
+   pod 'SendSandBoxFileSwift'
+   pod install
+```
+swift 地址：
+[https://github.com/iodefog/SendSandBoxFileSwift](https://github.com/iodefog/SendSandBoxFileSwift)
+
 使用方法 
 ```objc
     FileListTableViewController *fileListVC = [[FileListTableViewController alloc] init];
